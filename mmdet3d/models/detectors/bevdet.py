@@ -165,17 +165,47 @@ class BEVDet(CenterPoint):
                 'num of augmentations ({}) != num of image meta ({})'.format(
                     len(img_inputs), len(img_metas)))
 
-        if not isinstance(img_inputs[0][0], list):
-            img_inputs = [img_inputs] if img_inputs is None else img_inputs
-            points = [points] if points is None else points
-            return self.simple_test(points[0], img_metas[0], img_inputs[0],
-                                    **kwargs)
-        else:
-            return self.aug_test(None, img_metas[0], img_inputs[0], **kwargs)
+        # if not isinstance(img_inputs[0][0], list):
+        #     img_inputs = [img_inputs] if img_inputs is None else img_inputs
+        #     points = [points] if points is None else points
+        #     return self.simple_test(points[0], img_metas[0], img_inputs[0],
+        #                             **kwargs)
+        # else:
+        #     return self.aug_test(None, img_metas[0], img_inputs[0], **kwargs)
+
+        return self.aug_test(None, img_metas[0], img_inputs[0], **kwargs)
 
     def aug_test(self, points, img_metas, img=None, rescale=False):
         """Test function without augmentaiton."""
         assert False
+
+    # def aug_test_pts(self, feats, img_metas, rescale=False):
+    #     feats_list = []
+    #     for j in range(len(feats[0])):
+    #         feats_list_level = []
+    #         for i in range(len(feats)):
+    #             feats_list_level.append(feats[i][j])
+    #         feats_list.append(torch.stack(feats_list_level, -1).mean(-1))
+    #     outs = self.pts_bbox_head(feats_list, img_metas)
+    #     bbox_list = self.pts_bbox_head.get_bboxes(
+    #         outs, img_metas, rescale=rescale)
+    #     from mmdet3d.ops.transform import bbox3d2result
+    #     bbox_results = [
+    #         bbox3d2result(bboxes, scores, labels)
+    #         for bboxes, scores, labels in bbox_list
+    #     ]
+    #     return bbox_results
+    #
+    # def aug_test(self, points,img_metas, img=None, rescale=False,**kwargs):
+    #     """Test function with augmentaiton."""
+    #     img_feats, _, _ = self.extract_feat(
+    #         points, img=img, img_metas=img_metas, **kwargs)
+    #     img_metas = img_metas[0]
+    #     # bbox_list = [dict() for i in range(len(img_metas))]
+    #     bbox_pts = self.aug_test_pts(img_feats, img_metas, rescale)
+    #     for result_dict, pts_bbox in zip(bbox_list, bbox_pts):
+    #         result_dict['pts_bbox'] = pts_bbox
+    #     return bbox_list
 
     def simple_test(self,
                     points,

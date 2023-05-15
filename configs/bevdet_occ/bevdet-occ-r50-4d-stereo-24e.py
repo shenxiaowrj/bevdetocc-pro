@@ -125,7 +125,10 @@ model = dict(
 
 # Data
 dataset_type = 'NuScenesDatasetOccpancy'
-data_root = 'data/nuscenes/'
+## for debug
+data_root = '../data/nuscenes/'
+## for cmd
+# data_root = 'data/nuscenes/'
 file_client_args = dict(backend='disk')
 
 bda_aug_conf = dict(
@@ -208,7 +211,7 @@ test_data_config = dict(
     ann_file=data_root + 'bevdetv2-nuscenes_infos_test.pkl')
 
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=1,
     workers_per_gpu=4,
     train=dict(
         data_root=data_root,

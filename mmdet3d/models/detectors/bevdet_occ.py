@@ -81,6 +81,27 @@ class BEVStereo4DOCC(BEVStereo4D):
         occ_res = occ_res.squeeze(dim=0).cpu().numpy().astype(np.uint8)
         return [occ_res]
 
+    def aug_test_pts(self, feats, img_metas, rescale=False):
+        feats_list = []
+        for j in range(len(feats[0])):
+            feats_list_level = []
+            for i in range(len(feats)):
+                feats_list_level.append(feats[i][j])
+            feats_list.append(torch.stack(feats_list_level, -1).mean(-1))
+
+
+
+    def aug_test(self, points, img_metas, img=None, rescale=False,**kwargs):
+        """Test function without augmentaiton."""
+
+        flip_aug_mask = img_metas[0]['flip_aug']
+        scale_aug_mask = img_metas[0]['scale_aug']
+
+        img_feats, _, _ = self.extract_feat(
+            points, img=img, img_metas=img_metas, **kwargs)
+
+
+
     def forward_train(self,
                       points=None,
                       img_metas=None,
@@ -133,3 +154,4 @@ class BEVStereo4DOCC(BEVStereo4D):
         loss_occ = self.loss_single(voxel_semantics, mask_camera, occ_pred)
         losses.update(loss_occ)
         return losses
+

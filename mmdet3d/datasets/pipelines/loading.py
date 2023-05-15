@@ -426,6 +426,8 @@ class LoadPointsFromFile(object):
         if self.file_client is None:
             self.file_client = mmcv.FileClient(**self.file_client_args)
         try:
+            ## for debug
+            pts_filename = '.' + pts_filename
             pts_bytes = self.file_client.get(pts_filename)
             points = np.frombuffer(pts_bytes, dtype=np.float32)
         except ConnectionError:
@@ -946,6 +948,7 @@ class PrepareImageInputs(object):
         for cam_name in cam_names:
             cam_data = results['curr']['cams'][cam_name]
             filename = cam_data['data_path']
+            filename = '.' + filename
             img = Image.open(filename)
             post_rot = torch.eye(2)
             post_tran = torch.zeros(2)
@@ -980,6 +983,8 @@ class PrepareImageInputs(object):
                 assert 'adjacent' in results
                 for adj_info in results['adjacent']:
                     filename_adj = adj_info['cams'][cam_name]['data_path']
+                    ## for debug
+                    filename_adj = '.' + filename_adj
                     img_adjacent = Image.open(filename_adj)
                     img_adjacent = self.img_transform_core(
                         img_adjacent,
