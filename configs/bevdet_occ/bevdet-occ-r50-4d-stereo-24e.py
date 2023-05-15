@@ -205,7 +205,7 @@ share_data_config = dict(
 
 test_data_config = dict(
     pipeline=test_pipeline,
-    ann_file=data_root + 'bevdetv2-nuscenes_infos_val.pkl')
+    ann_file=data_root + 'bevdetv2-nuscenes_infos_test.pkl')
 
 data = dict(
     samples_per_gpu=4,
@@ -245,5 +245,10 @@ custom_hooks = [
     ),
 ]
 
-load_from="bevdet-r50-4d-stereo-cbgs.pth"
+
+# load_from="bevdet-r50-4d-stereo-cbgs.pth"
+## for  original train
+# load_from="./ckpt/bevdet-r50-4d-stereo-cbgs.pth"
+## for official test
+load_from="./ckpt/bevdet-occ-r50-4d-stereo-24e.pth"
 # fp16 = dict(loss_scale='dynamic')
