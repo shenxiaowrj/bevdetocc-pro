@@ -32,6 +32,8 @@ def single_gpu_test(model,
         list[dict]: The prediction results.
     """
     model.eval()
+    # import ttach as tta
+    # tta_model = tta.SegmentationTTAWrapper(model, tta.aliases.d4_transform(), merge_mode='mean')
     results = []
     dataset = data_loader.dataset
     prog_bar = mmcv.ProgressBar(len(dataset))
