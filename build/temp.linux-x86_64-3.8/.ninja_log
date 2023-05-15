@@ -1,0 +1,3 @@
+# ninja log v5
+0	658	1684113363523820529	/media/re/2384a6b4-4dae-400d-ad72-9b7044491b55/data_occ/bevdetocc-pro/build/temp.linux-x86_64-3.8/mmdet3d/ops/bev_pool_v2/src/bev_pool_cuda.o	3f619d2294fa8311
+0	17356	1684113380215626241	/media/re/2384a6b4-4dae-400d-ad72-9b7044491b55/data_occ/bevdetocc-pro/build/temp.linux-x86_64-3.8/mmdet3d/ops/bev_pool_v2/src/bev_pool.o	7305838dabe01e3d
