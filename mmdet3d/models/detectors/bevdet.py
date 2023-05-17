@@ -173,6 +173,8 @@ class BEVDet(CenterPoint):
         # else:
         #     return self.aug_test(None, img_metas[0], img_inputs[0], **kwargs)
 
+        # return self.simple_test(points[0], img_metas[0], img_inputs[0],
+        #                         **kwargs)
         return self.aug_test(None, img_metas[0], img_inputs[0], **kwargs)
 
     def aug_test(self, points, img_metas, img=None, rescale=False):
