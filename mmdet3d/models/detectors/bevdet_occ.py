@@ -81,13 +81,13 @@ class BEVStereo4DOCC(BEVStereo4D):
         occ_res = occ_res.squeeze(dim=0).cpu().numpy().astype(np.uint8)
         return [occ_res]
 
-    def aug_test_pts(self, feats, img_metas, rescale=False):
-        feats_list = []
-        for j in range(len(feats[0])):
-            feats_list_level = []
-            for i in range(len(feats)):
-                feats_list_level.append(feats[i][j])
-            feats_list.append(torch.stack(feats_list_level, -1).mean(-1))
+    # def aug_test_pts(self, feats, img_metas, rescale=False):
+    #     feats_list = []
+    #     for j in range(len(feats[0])):
+    #         feats_list_level = []
+    #         for i in range(len(feats)):
+    #             feats_list_level.append(feats[i][j])
+    #         feats_list.append(torch.stack(feats_list_level, -1).mean(-1))
 
 
 
